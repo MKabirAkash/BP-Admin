@@ -162,7 +162,7 @@
         </div>
         <div class="modal-body">
           <div class="px-7 py-5">
-            <form action="#" method="POST" target="_blank">
+            <form action="#" method="POST" target="_blank" >
                 <input type="hidden" name="type" value="filter" />
                 <div id="courseAlert"></div>
                 <div class="mb-5">
@@ -202,22 +202,56 @@
         </div>
         <div class="modal-body">
           <div class="px-7 py-5">
-            <form action="#" method="POST" target="_blank">
+            <form action="#" method="POST" target="_blank" id="checkBoxForm">
                 <input type="hidden" name="type" value="filter" />
+                <div id="batchAlert"></div>
                 <div class="mb-5">
-                    <label class="form-label fs-6 fw-bold">Course</label>
+                    <label class="form-label fs-6 fw-bold">*Course</label>
                     <select name="filtercourse" id="fCourse" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
                     border: 1px solid #ced4da;font-size: 16px;">
                         <option selected disabled value >--select course--</option>
-                        <option  value="first" >First Course</option>
-                        <option  value="second" >2nd course</option>
+                        <?php 
+                            include 'dbconnect.php'; 
+                            try{
+                                $userquery=$conn->prepare("SELECT * FROM course;");
+                                $userquery->execute();
+                                $rows=$userquery->fetchAll(PDO::FETCH_ASSOC);
+                                foreach($rows as $row){
+                                    echo '<option value="'.$row['course_id'].'">'.$row['title'].'</option>';
+                                }
+                            }
+                            catch(error){
+                                echo '<option value="own">No course running..</option>';
+                            }
+                            
+                        
+                        ?>
                     </select>
                 </div>
                 <div class="separator border-gray-200"></div>
                 <div class="mb-5">
-                    <label class="form-label fs-6 fw-bold">Weekdays</label>
-                    <form id="checkBoxForm">
+                    <label class="form-label fs-6 fw-bold">*Weekdays</label>
+                    <form >
                         <div class="form-group">
+                            <div class="row my-2">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="days[]" value="Friday" id="friday">
+                                        <label class="form-check-label" for="friday">Friday</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="days[]" value="Saturday" id="saturday">
+                                        <label class="form-check-label" for="saturday">Saturday</label>
+                                    </div>
+                                </div> 
+                                <div class="col-4">   
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="days[]" value="Sunday" id="sunday">
+                                        <label class="form-check-label" for="sunday">Sunday</label>
+                                    </div>
+                                </div>
                             <div class="row my-2">
                                 <div class="col-3">
                                     <div class="form-check">
@@ -244,47 +278,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row my-2">
-                                <div class="col-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="days[]" value="Friday" id="friday">
-                                        <label class="form-check-label" for="friday">Friday</label>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="days[]" value="Saturday" id="saturday">
-                                        <label class="form-check-label" for="saturday">Saturday</label>
-                                    </div>
-                                </div> 
-                                <div class="col-4">   
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="days[]" value="Sunday" id="sunday">
-                                        <label class="form-check-label" for="sunday">Sunday</label>
-                                    </div>
-                                </div>
+                            
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="separator border-gray-200"></div>
                 <div class="mb-5">
-                    <label class="form-label fs-6 fw-bold">Start Time</label>
-                    <input type="time" name="filtergender" id="fGender" class=" fw-bolder form-control custom-select" style="background-color: #f8f9fa;
+                    <label class="form-label fs-6 fw-bold">*Start Time</label>
+                    <input type="time" name="filtercourse" id="fStartTime" class=" fw-bolder form-control custom-select" style="background-color: #f8f9fa;
                     border: 1px solid #ced4da;font-size: 16px;" />
                 </div>
                 <div class="separator border-gray-200"></div>
                 <div class="mb-5">
-                <label class="form-label fs-6 fw-bold">End Time</label>
-                    <input type="time" name="filtergender" id="fGender" class=" fw-bolder form-control custom-select" style="background-color: #f8f9fa;
+                <label class="form-label fs-6 fw-bold">*End Time</label>
+                    <input type="time" name="filterbatch" id="fEndTime" class=" fw-bolder form-control custom-select" style="background-color: #f8f9fa;
                     border: 1px solid #ced4da;font-size: 16px;" />
                 </div>
-
+                <button type="submit" id="addBatchBtn" class="btn btn-primary">Confirm</button>
             </form>
           </div> 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Confirm</button>
+        <div class="modal-footer">   
         </div>
       </div>
     </div>

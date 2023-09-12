@@ -61,6 +61,7 @@
             </div>
             <div class="card-body py-4">
                 <div class="table-responsive">
+
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
                         <thead>
                             <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
@@ -73,18 +74,38 @@
                             </tr>
                         </thead>
                             <tbody class="text-gray-600 fw-bold">
-                                <tr>
-                                    <td>Sarjil</td>
-                                    <td>01711233444</td>
-                                    <td class="text-muted">Male</td>
-                                    <td class="text-muted">Courses</td>
-                                    <td class="text-muted">02:00pm - 04:30pm</td>
-                                    <td class="text-end" style="min-width:150px">
-                                        <a href="#" class="btn btn-danger btn-sm px-3"><i class="fas fa-trash"></i></a>
-                                        <a href="#" class="btn btn-primary btn-sm px-3"><i class="fa-solid fa-download"></i></a>
-                                        <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i>paid</a>
-                                    </td>
-                                </tr>
+                                <?php
+                                    include 'dbconnect.php';
+                                    include 'myfunc.php';
+                                    $expen= $conn ->prepare("SELECT * FROM expense;");
+                                    $expen ->execute();
+                                    $exrows = $expen ->fetchAll();
+                                    if($exrows > 0){
+                                        foreach($exrows as $row){ ?>
+                                            <tr>
+                                                <td><?php echo out($row['amount']) ?></td>
+                                                <td><?php echo out($row['done_by']) ?></td>
+                                                <td class="text-muted"><?php echo out($row['purpose']) ?></td>
+                                                <td class="text-muted"><?php echo out($row['confirmed_by']) ?></td>
+                                                <td class="text-muted"><?php echo out($row['issue_time']) ?></td>
+                                                <td class="text-end" style="min-width:150px">
+                                                    <button type="submit" class="btn btn-danger btn-sm px-3 deleteExpense"  data-id="<?php echo $row['expense_id'] ?>"><i class="fas fa-trash"></i></button>
+                                                    <a href="#" class="btn btn-primary btn-sm px-3"><i class="fa-solid fa-download"></i></a>
+                                                    <?php
+                                                        if($row['is_paid']==1){ ?>
+                                                            <button type="submit"  class="btn btn-success btn-sm"><i class="fa-solid fa-check"></i>completed</button>
+                                                        <?php } 
+                                                        else {
+                                                    ?>
+                                                        <button type="submit" class="btn btn-warning btn-sm expensePay"  data-id="<?php echo $row['expense_id'] ?>"><i class="fa-solid fa-question"></i>PayNow</button>
+                                                        <button type="submit" class="btn btn-warning btn-sm confirmBtn" data-id="<?php echo $row['expense_id'] ?>" style="display:none;">confirm?</div>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                       <?php }
+                                    }
+                                ?>
+                                
                             </tbody>
                     </table>
                 </div>
@@ -144,11 +165,11 @@
                         <?php 
                             include 'dbconnect.php'; 
                             try{
-                                $userquery=$conn->prepare("SELECT phone FROM user;");
+                                $userquery=$conn->prepare("SELECT * FROM user;");
                                 $userquery->execute();
                                 $rows=$userquery->fetchAll(PDO::FETCH_ASSOC);
                                 foreach($rows as $row){
-                                    echo '<option value="'.$row['phone'].'">'.$row['phone'].'</option>';
+                                    echo '<option value="'.$row['id'].'">'.$row['phone'].'</option>';
                                 }
                             }
                             catch(error){
@@ -168,11 +189,11 @@
                         <?php 
                             include 'dbconnect.php'; 
                             try{
-                                $userquery=$conn->prepare("SELECT phone FROM user;");
+                                $userquery=$conn->prepare("SELECT * FROM user;");
                                 $userquery->execute();
                                 $rows=$userquery->fetchAll(PDO::FETCH_ASSOC);
                                 foreach($rows as $row){
-                                    echo '<option value="'.$row['phone'].'">'.$row['phone'].'</option>';
+                                    echo '<option value="'.$row['id'].'">'.$row['phone'].'</option>';
                                 }
                             }
                             catch(error){
@@ -193,7 +214,5 @@
       </div>
     </div>
   </div>
-
-
 
 <?php require_once 'footer.php'; ?>

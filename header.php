@@ -309,7 +309,7 @@
 
 					<!--start::Modal-->
 					<div class="modal fade " id="addstudentmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-						<div class="modal-dialog modal-lg" style="max-width: 90%; !important" role="document">
+						<div class="modal-dialog modal-lg" style="max-width: 50%; !important" role="document">
 						  <div class="modal-content">
 							<div class="modal-header">
 							  <h5 class="modal-title" id="exampleModalLabel">New Student</h5>
@@ -317,141 +317,183 @@
 							</div>
 							<div class="modal-body">
 								<div class="row p-2">
-									<div class=" col-6">
-									<div class="p-2">
-											<i class="fa-solid fa-1 text-dark"></i>
-											<h3 class="text-dark mt-2">Details</h3>
-											<p class="text-muted mb-0">Student Information</p>
-											
-											
+									<div class=" col-4">
+										<div class="p-2">		
+											<i class="fa-solid fa-1 fs-2hx text-dark"></i>
+											<span class="text-dark mt-2 fs-1  fw-bold mb-3">
+												Details
+											</span> 
+											<p class="text-muted px-8 mb-0">Student Information</p>	
+										</div>
+										<div class="p-2">		
+											<i class="fa-solid fa-2 fs-2hx text-dark"></i>
+											<span class="text-dark mt-2 fs-1  fw-bold mb-3">
+												Course 
+											</span> 
+											<p class="text-muted px-8 mb-0">Course information</p>	
+										</div>	
+										<div class="p-2">		
+											<i class="fa-solid fa-3 fs-2hx text-dark"></i>
+											<span class="text-dark mt-2 fs-1  fw-bold mb-3">
+												Payment
+											</span> 
+											<p class="text-muted px-8 mb-0">Student payment Information</p>	
+										</div>
+									</div>
+									<div class=" col-8">
+										<div class="p-2">	
 											<form action="#" method="POST" target="_blank" class="p-5">
-												<input type="hidden" name="type" value="export" />
-												<div class="mb-5">
-													<label class="form-label fs-6 fw-bold text-muted">Phone</label>
-													<input type="text" name="studentnum" id="studentNum" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-													border: 1px solid #ced4da;font-size: 16px;"  />
-												</div>
+												<div id="stepOne" >
+													<div id="stepOneAlert"></div>
+													<div class="mb-5">
+														<label class="form-label fs-6 fw-bold text-muted">*Phone</label>
+														<input type="text" name="studentnum" id="studentNum" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+														border: 1px solid #ced4da;font-size: 16px;"  />
+													</div>
+			
+													<div class="mb-5">
+														<label class="form-label fs-6 fw-bold text-muted">*Name</label>
+														<input type="text" name="studentname" id="studentName" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+														border: 1px solid #ced4da;font-size: 16px;"  />
+													</div>
 		
-												<div class="mb-5">
-													<label class="form-label fs-6 fw-bold text-muted">Name</label>
-													<input type="text" name="studentname" id="studentName" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-													border: 1px solid #ced4da;font-size: 16px;"  />
-												</div>
-	
-												<div class="mb-5">
-													<div class="row">
-														<div class="col-6">
-															<label class="form-label fs-6 fw-bold text-muted">Date of Birth</label>
-															<input type="date" name="studentdob" id="studentDob" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-															border: 1px solid #ced4da;font-size: 16px;" />
+													<div class="mb-5">
+														<div class="row">
+															<div class="col-6">
+																<label class="form-label fs-6 fw-bold text-muted">*Date of Birth</label>
+																<input type="date" name="studentdob" id="studentDob" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+																border: 1px solid #ced4da;font-size: 16px;" />
+															</div>
+															<div class="col-6">
+																<label class="form-label text-muted fs-6 fw-bold ">*Gender</label>
+																<select name="studentgender" id="studentGender" class=" fw-bold form-control  custom-select" style="background-color: #f8f9fa;
+																border: 1px solid #ced4da;font-size: 16px;">
+																	<option selected disabled value >--gender--</option>
+																	<option value="male" >Male</option>
+																	<option value="female" >Female</option>
+																	<option value="other" >Other</option>
+																</select>
+															</div>
 														</div>
-														<div class="col-6">
-															<label class="form-label text-muted fs-6 fw-bold ">Gender</label>
-															<select name="studentgender" id="studentgender" class=" fw-bold form-control  custom-select" style="background-color: #f8f9fa;
+													</div>
+													
+													<div class="mb-5">
+														<div class="row">
+															<div class="col-6">
+																<label class="form-label fs-6 fw-bold text-muted">*Guardian Phone No</label>
+																<input type="text" name="studentguardian" id="studentGuardian" class=" fw-bold text-muted form-control custom-select" style="background-color: #f8f9fa;
+																border: 1px solid #ced4da;font-size: 16px;" />
+															</div>
+															<div class="col-6">
+																<label class="form-label fs-6 fw-bold text-muted">*Roll No</label>
+																<input type="text" name="studentroll" id="studentRoll" class=" fw-bold text-muted form-control custom-select" style="background-color: #f8f9fa;
+																border: 1px solid #ced4da;font-size: 16px;" />
+															</div>
+														</div>
+													</div>
+													<div class="mb-5">
+														<label class="form-label fs-6 fw-bold text-muted">College name</label>
+														<input type="text" name="studentcollege" id="studentCollege" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+														border: 1px solid #ced4da;font-size: 16px;" placeholder="( optional )"/>
+													</div>
+													<div class="mb-5">
+														<div class="row">
+															<div class="col-6">
+																<label class="form-label fs-6 fw-bold text-muted">SSC Roll</label>
+																<input type="text" name="studentsscroll" id="studentSSCRoll" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+																border: 1px solid #ced4da;font-size: 16px;" placeholder="( optional )"/>
+															</div>
+															<div class="col-6">
+																<label class="form-label fs-6 fw-bold text-muted">HSC Roll</label>
+																<input type="text" name="studenthscroll" id="studentHSCRoll" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+																border: 1px solid #ced4da;font-size: 16px;" placeholder="( optional )"/>
+																	
+															</div>
+														</div>
+													</div>
+													<div class="mb-5">
+														<div class="row justify-content-end">
+															<button type="button" id ="studentGoStep2" class="btn btn-primary w-auto">Continue</button>
+														</div>
+													</div>
+												</div>
+												<div id="stepTwo" style="display:none;">
+													<div id="stepTwoAlert"></div>
+													<div class="mb-5">
+														<label class="form-label fs-6 text-muted fw-bold ">*Course</label>
+														<select name="studentcourse" id="studentCourse" class=" fw-bold  form-control custom-select" style="background-color: #f8f9fa;
 															border: 1px solid #ced4da;font-size: 16px;">
-																<option selected disabled value >--gender--</option>
-																<option value="male" >Male</option>
-																<option value="female" >Female</option>
-																<option value="other" >Other</option>
-															</select>
+															<option selected disabled value >--select course--</option>
+															<?php 
+																include 'dbconnect.php'; 
+																try{
+																	$coursequery=$conn->prepare("SELECT * FROM course;");
+																	$coursequery->execute();
+																	$rows=$coursequery->fetchAll(PDO::FETCH_ASSOC);
+																	foreach($rows as $row){
+																		echo '<option value="'.$row['course_id'].'">'.$row['title'].'</option>';
+																	}
+																}
+																catch(error){
+																	echo '<option disabled value>(No batch  available)</option>';
+																}
+															?>
+														</select>
+													</div>
+													<div class="mb-5">
+														<label class="form-label text-muted fs-6 fw-bold ">*Batch</label>
+														<select name="studentbatch" id="studentBatch" class=" fw-bold  form-control custom-select" style="background-color: #f8f9fa;
+															border: 1px solid #ced4da;font-size: 16px;">
+															<option selected disabled value >--select batch--</option>
+														</select>
+													</div>
+													<div class="mb-5">
+														<div class="row justify-content-end">
+															<button type="button" id ="backToStep1" class="btn btn-primary w-auto me-3">Prev</button>
+															<button type="button" id ="studentGoStep3" class="btn btn-primary w-auto">Continue</button>
 														</div>
 													</div>
 												</div>
-												
-												<div class="mb-5">
-													<label class="form-label fs-6 fw-bold text-muted">Guardian Phone No</label>
-													<input type="text" name="studentguardian" id="studentGuardian" class=" fw-bold text-muted form-control custom-select" style="background-color: #f8f9fa;
-													border: 1px solid #ced4da;font-size: 16px;" />
-												</div>
-												<div class="mb-5">
-													<label class="form-label fs-6 fw-bold text-muted">College name</label>
-													<input type="text" name="studentcollege" id="studentCollege" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-													border: 1px solid #ced4da;font-size: 16px;" placeholder="( optional )"/>
-												</div>
-												<div class="mb-5">
-													<div class="row">
-														<div class="col-6">
-															<label class="form-label fs-6 fw-bold text-muted">SSC Roll</label>
-															<input type="text" name="studentsscroll" id="studentSSCRoll" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-															border: 1px solid #ced4da;font-size: 16px;" placeholder="( optional )"/>
+												<div id="stepThree" style="display:none;">
+													<div id="stepThreeAlert"></div>
+													<div id="paymentamount"></div>
+													<div class="mb-5">
+														<div class="row p-2">
+															<div class="col-6">
+																<label class="form-label fs-6 fw-bold text-muted">Deposit</label>
+																<input type="number" name="studentdeposit" id="studentDeposit" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+																border: 1px solid #ced4da;font-size: 16px;" />
+															</div>
+															<div class="col-6">
+																<label class="form-label fs-6 fw-bold text-muted">Due</label>
+																<input type="text" name="studentDue" id="studentDue" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+																border: 1px solid #ced4da;font-size: 16px;" />
+															</div>
 														</div>
-														<div class="col-6">
-															<label class="form-label fs-6 fw-bold text-muted">HSC Roll</label>
-															<input type="text" name="studenthscroll" id="studentHSCRollr" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-															border: 1px solid #ced4da;font-size: 16px;" placeholder="( optional )"/>
-																
+													</div> 
+													<div class="mb-5">
+														<div class="row" id="studentDueDate">	
 														</div>
 													</div>
+													<div class="mb-5">
+														<label class="form-label fs-6 fw-bold text-muted">Issued by</label>
+														<input type="text" name="studentissue" id="studentIssue" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
+														border: 1px solid #ced4da;font-size: 16px;" />
+													</div>
+													<div class="mb-5">
+														<div class="row justify-content-end">
+															<button type="button" id ="backToStep2" class="btn btn-primary w-auto me-3">Prev</button>
+															<button type="button" id ="confirmAdmission" class="btn btn-primary w-auto me-3">Confirm</button>
+														</div>
+													</div> 
 												</div>
 											</form>
 										</div>
-									</div>
-									<div class="col-6">
-										<div class="p-2">
-											<div class="row p-2">
-												<i class="fa-solid fa-2 text-dark"></i>
-												<h3 class="text-dark mt-2">Course</h3>
-												<p class="text-muted mb-0">Course & Batch Information</p>
-												<form action="#" method="POST" target="_blank" class="p-5">
-													<input type="hidden" name="type" value="export" />
-													<div class="mb-5">
-														<label class="form-label fs-6 text-muted fw-bold ">Course</label>
-															<select name="studentcourse" id="studentCourse" class=" fw-bold  form-control custom-select" style="background-color: #f8f9fa;
-																border: 1px solid #ced4da;font-size: 16px;">
-																<option selected disabled value >--select course--</option>
-																<option value="c1" >course 1</option>
-																<option value="c2" >course 2 </option>
-																<option value="c3" >course 3</option>
-															</select>
-													</div>
-													<div class="mb-5">
-														<label class="form-label text-muted fs-6 fw-bold ">Batch</label>
-															<select name="studentbatch" id="studentBatch" class=" fw-bold  form-control custom-select" style="background-color: #f8f9fa;
-																border: 1px solid #ced4da;font-size: 16px;">
-																<option selected disabled value >--select batch--</option>
-																<option value="c1" >batch  1</option>
-																<option value="c2" >batch 2 </option>
-																<option value="c3" >batch 3</option>
-															</select>
-													</div>
-												</form>
-											</div>
-											<div class="separator border-gray-200"></div>
-											<div class="row p-2">
-												<i class="fa-solid fa-3 text-dark "></i>
-												<h3 class="text-dark mt-2">Payment</h3>
-												<p class="text-muted mb-0">Student payment</p>
-												<div id="paymentamount"></div>
-												<div class="mb-5">
-													<div class="row p-2">
-														<div class="col-6">
-															<label class="form-label fs-6 fw-bold text-muted">Deposit</label>
-															<input type="number" name="studentdeposit" id="studentDeposit" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-															border: 1px solid #ced4da;font-size: 16px;" />
-														</div>
-														<div class="col-6">
-															<label class="form-label fs-6 fw-bold text-muted">Due</label>
-															<input type="text" name="studentDue" id="studentDue" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-															border: 1px solid #ced4da;font-size: 16px;" />
-														</div>
-													</div>
-												</div> 
-												<div class="mb-5">
-													<div class="row" id="studentDueDate">	
-													</div>
-												</div>
-												<div class="mb-5">
-													<label class="form-label fs-6 fw-bold text-muted">Issued by</label>
-													<input type="text" name="studentissue" id="studentIssue" class=" fw-bold form-control custom-select" style="background-color: #f8f9fa;
-													border: 1px solid #ced4da;font-size: 16px;" />
-												</div> 
-											</div>
-										</div>
-									</div>									
+									</div>								
 								</div>
 							</div>
 							<div class="modal-footer">
-							  <button type="button" class="btn btn-primary">Confirm Admission</button>
+							  
 							</div>
 						  </div>
 						</div>

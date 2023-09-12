@@ -155,6 +155,7 @@ jQuery(document).ready(function($){
         const purpose=$("#expensePurpose").val();
         const done_by=$("#expenseDoneBy").val();
         const confirmed_by=$("#expenseConfirmedBy").val();
+        console.log(done_by,confirmed_by);
         console.log(amount,purpose,done_by,confirmed_by);
         if(purpose !==null && purpose=== "tpay" ){
             const tname=$("#expenseTeacherName").val();
@@ -164,7 +165,7 @@ jQuery(document).ready(function($){
                 const output='<span class="text-danger me-2 mb-2  fs-6 align-items-center"><i class="fa-solid fa-circle-exclamation"></i> * fields should not be empty</span>';
                 $("#expenseAlert").html(output);
             }
-            else if( !tname || tname.length===0 ){
+            else if( !tname || tname.length <=0 ){
                 const output='<span class="text-danger me-2 mb-2  fs-6 align-items-center"><i class="fa-solid fa-circle-exclamation"></i> * feilds should not be empty</span>';
                 $("#expenseAlert").html(output);
             }
@@ -366,6 +367,7 @@ jQuery(document).ready(function($){
                     if(response === "course_added"){
                         const output='<span class="text-success me-2 mb-2  fs-6 align-items-center"><i class="fa-solid fa-circle-exclamation"></i> Course added successfully..</span>';
                         $("#courseAlert").html(output);
+                        setTimeout(window.location.href="Admin/courseinfo.php",3000);
                     }
                     else{
                         const output='<span class="text-success me-2 mb-2  fs-6 align-items-center"><i class="fa-solid fa-circle-exclamation"></i>'+response+'</span>';
@@ -380,3 +382,67 @@ jQuery(document).ready(function($){
     });
 });
 //add course ends here
+
+
+//add batch starts here
+$(document).ready(function() {
+    $('#addBatchBtn').click(function(e) {
+        e.preventDefault();
+        const course = $('#fCourse').val();
+        const days = [];
+        if($("input[name='days[]']:checked")) {
+            $("input[name='days[]']:checked").each(function () {
+                days.push($(this).val());
+            });
+        } 
+        let weekdays="";
+        
+        days.length >0 ? days.map((day)=>{
+            weekdays = weekdays + day + "  " ;
+            
+        }): "";
+        console.log(course);
+        console.log(weekdays);
+        
+        const startTime = $('#fStartTime').val();
+        const endTime = $('#fEndTime').val();
+        console.log(startTime,endTime);
+        if(!course || days.length <=0 || !startTime || !endTime || course.length <=0 || weekdays.length <=0  ){
+            const output='<span class="text-danger me-2 mb-2  fs-6 align-items-center"><i class="fa-solid fa-circle-exclamation"></i> * fields should not be empty</span>';
+            $("#batchAlert").html(output);
+        }
+        else if(course.length > 50 || weekdays.length > 50 ){
+            const output='<span class="text-danger me-2 mb-2  fs-6 align-items-center"><i class="fa-solid fa-circle-exclamation"></i> Fields must be within 1-50 digits </span>';
+            $("#batchAlert").html(output);
+        }
+        else{
+            $.ajax({
+                url : 'Admin/backendajax.php',
+                method : 'POST',
+                data : {
+                    'course' : course,
+                    'days' : weekdays,
+                    'startTime' : startTime,
+                    'endTime' : endTime,
+                    'action' : 'add_batch'
+                },
+                success:function(response){
+                    if (response === "batch_added"){
+                        const output='<span class="text-success me-2 mb-2  fs-6 align-items-center"><i class="fa-solid fa-circle-exclamation"></i> Batch added successfully..</span>';
+                        $("#batchAlert").html(output);
+                        setTimeout(window.location.href="Admin/courseinfo.php",3000);
+                    }
+                    else{
+                        const output='<span class="text-success me-2 mb-2  fs-6 align-items-center"><i class="fa-solid fa-circle-exclamation"></i>Server issue arising.Contact admin.</span>';
+                        $("#batchAlert").html(output);
+                    }
+                }
+            });
+        }
+       
+    });
+});
+
+
+
+//add batch ends here

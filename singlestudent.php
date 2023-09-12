@@ -8,7 +8,7 @@
                 <i class="ki-duotone ki-filter fs-5 me-1">
                     <span class="path1"></span>
                     <span class="path2"></span>
-                </i>Md. Student</a>
+                </i>Student Details</a>
         </div>
         <div class="d-flex align-items-center py-3 py-md-1 ">
             <!--begin::Wrapper-->
@@ -96,119 +96,158 @@
                 </div>
             </div>
             <div class="card-body py-8">  
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="container">
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Student Name</label></div>
-                                <div class="col-6"><span class=" text-gray-80 fw-bolder fs-6">akash</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold">Student Phone</label></div>
-                                <div class="col-6"><span class=" text-gray-80 fw-bolder fs-6">01711111182</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold">Date of Birth</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">5th September,2008</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Gender</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">Male</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Student College</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">[not set]</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-2">
-                                <div class="col-6"><label class="text-muted fw-bold ">SSC Roll</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">[not set]</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">HSC Roll</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 ">[not set]</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold">Guardian's Phone</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">00118822332</span></div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row"> 
+                        <?php
+                            
+                            include 'dbconnect.php';
+                            include 'myfunc.php';
+                            if(isset($_GET['id'])){
+                                $id = $_GET['id'];
+                                $getstudent = $conn ->prepare("SELECT * FROM student WHERE id = ?;");
+                                $getstudent -> bindParam(1, $id, PDO::PARAM_STR);
+                                $getstudent -> execute();
+                                $s = $getstudent ->fetch(PDO::FETCH_ASSOC);
+                                if($s){
+                                        $a_date = $s['admit_time'];
+                                        $date = substr((string)$a_date,0,10);
+                                        $time = substr((string)$a_date,10,9);
+                                        $cid = $s['course_id'];
+                                        $bid = $s['batch_id'];
 
-                    <div class="col-lg-4 col-md-6 border-left ">
-                        <div class="container">
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold">Admission Date</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">05 Sep 2023</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold">Admission Time</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">09:36:44 PM</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Course Name</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">DU A</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Roll Number</label></div>
-                                <div class="col-6"><sapn class="text-gray-80 fw-bolder fs-6">123444</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Batch Days</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">Sat-Mon-Wed</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Batch Time</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6">07:00 AM - 09:00 AM</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Course Fee</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 ">Tk. 9999</span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">Total</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 ">Tk. 9999</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                    <div class="container">
-                            <div class="row my-5">
-                                <div class="col-12"><h4 class=" fw-bold align-items-start">Payment Details</h4></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold">Paid on Admission</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 ">Tk 7999 <span class="badge badge-light-success fs-7">paid</span></span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-12"><h4 class=" fw-bold align-items-start">Late Payment(s)</h4></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <div class="col-6"><label class="text-muted fw-bold ">31st september,2023</label></div>
-                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 align-items-start">Tk 2000<span class="badge badge-light-warning fs-7">unpaid</span></span></div>
-                            </div>
-                            <div class="separator separator-dashed border-gray-200"></div>
-                            <div class="row my-5">
-                                <button class="btn btn-block btn-light btn-active-primary">Pay Now</button>
-                            </div>
-                        </div>
-                    </div>
+                                        $getcourse = $conn ->prepare("SELECT * FROM course WHERE course_id = ?;");
+                                        $getcourse -> bindParam(1, $cid, PDO::PARAM_STR);
+                                        $getcourse ->execute();
+                                        $cinfo = $getcourse ->fetch(PDO::FETCH_ASSOC);
+                                        
+                                        $getbatch = $conn ->prepare("SELECT * FROM batch WHERE batch_id = ?;");
+                                        $getbatch -> bindParam(1, $bid, PDO::PARAM_STR);
+                                        $getbatch ->execute();
+                                        $binfo = $getbatch ->fetch(PDO::FETCH_ASSOC);
+                                        ?>
+
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="container">
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Student Name</label></div>
+                                                <div class="col-6"><span class=" text-gray-80 fw-bolder fs-6"><?php echo out($s['sname']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold">Student Phone</label></div>
+                                                <div class="col-6"><span class=" text-gray-80 fw-bolder fs-6"><?php echo out($s['snumber']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold">Date of Birth</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($s['sdob']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Gender</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($s['sgender']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Student College</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($s['scollege']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-2">
+                                                <div class="col-6"><label class="text-muted fw-bold ">SSC Roll</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($s['sssc']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">HSC Roll</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 "><?php echo out($s['shsc']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold">Guardian's Phone</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($s['gnumber']);?></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6 border-left ">
+                                        <div class="container">
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold">Admission Date</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($date);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold">Admission Time</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($time);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Course Name</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($cinfo['title']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Roll Number</label></div>
+                                                <div class="col-6"><sapn class="text-gray-80 fw-bolder fs-6"><?php echo out($s['sroll']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Batch Days</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($binfo['weekdays']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Batch Time</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6"><?php echo out($binfo['startTime'])." to ".out($binfo['endTime']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Course Fee</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 "><?php echo out($cinfo['price']);?></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold ">Total</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 "><?php echo out($cinfo['price']);?></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                    <div class="container">
+                                            <div class="row my-5">
+                                                <div class="col-12"><h4 class=" fw-bold align-items-start">Payment Details</h4></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold">Paid on Admission</label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 "><?php echo out($s['sdeposit']);?> <span class="badge badge-light-success fs-7">paid</span></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-12"><h4 class=" fw-bold align-items-start">Late Payment(s)</h4></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <div class="col-6"><label class="text-muted fw-bold "><?php echo out($s['sduedate']);?></label></div>
+                                                <div class="col-6"><span class="text-gray-80 fw-bolder fs-6 align-items-start"><?php echo out($s['sdue']);?><span class="badge badge-light-warning fs-7">unpaid</span></span></div>
+                                            </div>
+                                            <div class="separator separator-dashed border-gray-200"></div>
+                                            <div class="row my-5">
+                                                <button class="btn btn-block btn-light btn-active-primary">Pay Now</button>
+                                            </div>
+                                        </div>
+                                    </div>    
+
+
+                                    <?php }
+                                    else{?>
+                                       <div class="col-6 text-danger  fs-4 fw-bold">No Data found for mentioned student..!!</div>  
+
+                                    <?php }
+                                }
+                            
+                        ?>
+                    
                 </div>
             </div>          
         </div>

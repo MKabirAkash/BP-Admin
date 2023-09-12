@@ -26,7 +26,7 @@
             <!--end::Wrapper-->
             <!--begin::Button-->
             <div>
-            <a href={% url 'addstudent' %} data-bs-theme="light" class="btn bg-body btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#addstudentmodal" id="kt_toolbar_primary_button">New Admission</a>
+            <a href="#" data-bs-theme="light" class="btn bg-body btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#addstudentmodal" id="kt_toolbar_primary_button">New Admission</a>
             </div>
             <!--end::Button-->
         </div>
@@ -92,21 +92,18 @@
                             </tr>
                         </thead>
                         
-                            <tbody class="text-gray-600 fw-bold">
-                                <tr>
-                                    <td>Sarjil</td>
-                                    <td>01711233444</td>
-                                    <td class="text-muted">Male</td>
-                                    <td class="text-muted">Courses</td>
-                                    <td class="text-muted">02:00pm - 04:30pm</td>
-                                    <td class="text-muted">123456</td>
-                                    <td class="text-end" style="min-width:150px">
-                                        <a href="#" class="btn btn-primary btn-sm px-3"><i class="fas fa-pencil-alt"></i></a>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="far fa-eye"></i>View</a>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        <tbody class="text-gray-600 fw-bold" id="allStudentList">
+                            <tr>
+                            </tr>
+                        </tbody>                           
                     </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" id="prevPage" href="#" >Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#" id="currentPage" >1</a></li>
+                            <li class="page-item"><a class="page-link" href="#" id="nextPage" >Next</a></li>
+                        </ul>
+                    </nav>
                 </div>                
             </div>          
         </div>
